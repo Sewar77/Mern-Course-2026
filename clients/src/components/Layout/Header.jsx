@@ -2,15 +2,16 @@ import React, { use } from "react";
 import "./Header.css";
 import { useNavigate } from "react-router-dom";
 import api from "../../api";
-
+import toast from "react-hot-toast";
 function Header() {
   const navigate = useNavigate();
-  const handleLogout = async () => {
+  const handlLogout = async () => {
     try {
       await api.post("/logout");
+      toast.success("logged out successfully");
       navigate("/");
     } catch (err) {
-      console.err(err);
+      console.log(err);
     }
   };
   return (
@@ -42,8 +43,7 @@ function Header() {
           <button onClick={() => navigate("/about")}>About</button>
         </div>
         <div>
-          {" "}
-          <button onClick={() => handleLogout}>Logout</button>
+          <button onClick={handlLogout}>Logout</button>
         </div>
       </header>
     </>
