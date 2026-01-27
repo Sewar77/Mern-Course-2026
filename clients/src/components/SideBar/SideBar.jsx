@@ -23,11 +23,7 @@ function SideBar({ isOpen }) {
     <>
       <div className={`sidebar ${isOpen ? "open" : "closed"}`}>
         <div className="sidebar-header">
-          <h2>
-            name: {user.name} <br />
-            email: {user.email} <br />
-            role: {user.role}
-          </h2>
+          <h2>name: {user.name}</h2>
         </div>
         <div className="sidebar-list">
           <ul>
@@ -35,7 +31,7 @@ function SideBar({ isOpen }) {
               <a onClick={() => navigate()}>Dashboard</a>
             </li>
             <li>
-              <a onClick={() => navigate()}>Profile</a>
+              <button onClick={() => navigate("/user/profile")}>Profile</button>
             </li>
             <li>
               <a onClick={() => navigate()}>Users</a>

@@ -10,10 +10,12 @@ import DisplayUsers from "./components/Admin/Users/DsiplayUsers.jsx";
 import DisplayCategories from "./components/Admin/Categories/DisplayCategories.jsx";
 import DisplayProducts from "./components/Admin/Products/DisplayProducts.jsx";
 import About from "./components/Shared/About.jsx";
+import Profile from "./components/Profile/Profile.jsx";
 function App() {
   return (
     <>
       <Toaster position="top-center" />
+      {/* define routes */}
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LandingHome />} />
@@ -31,8 +33,7 @@ function App() {
             element={<DisplayCategories />}
           />
           <Route path="/admin/dashboard/users" element={<DisplayUsers />} />
-
-          {/* define routes */}
+          <Route path="/user/profile" element={<Profile />} />
         </Routes>
       </BrowserRouter>
     </>
