@@ -17,7 +17,7 @@ const app = express();
 app.use(cookieParser());
 app.use(helmet())
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: "http://localhost:5174",
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
 }));
