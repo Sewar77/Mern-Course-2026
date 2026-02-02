@@ -11,6 +11,8 @@ import DisplayCategories from "./components/Admin/Categories/DisplayCategories.j
 import DisplayProducts from "./components/Admin/Products/DisplayProducts.jsx";
 import About from "./components/Shared/About.jsx";
 import Profile from "./components/Profile/Profile.jsx";
+import Messages from "./components/Admin/Messages/Messages.jsx"
+import ContactUs from "./components/Contact/ContactUs.jsx";
 function App() {
   return (
     <>
@@ -21,9 +23,11 @@ function App() {
           <Route path="/" element={<LandingHome />} />
           <Route path="/login" element={<Login />} />
           <Route path="/about" element={<About />} />
+          <Route path="/contactus" element={<ContactUs />} />
           <Route path="/register" element={<Register />} />
           <Route path="/user/dashboard" element={<UserDashboard />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/admin/dashboard/messages" element={<Messages />} />
           <Route
             path="/admin/dashboard/products"
             element={<DisplayProducts />}

@@ -7,6 +7,7 @@ import productRoutes from "./src/routes/product.Routes.js";
 import categoryRouter from "./src/routes/categories.Routes.js";
 import authRoutes from "./src/routes/auth.Routes.js";
 import helmet from "helmet";
+import messagesRoutes from "./src/routes/messages.Routes.js"
 import cookieParser from "cookie-parser";
 dotenv.config();
 connectDB();
@@ -17,7 +18,7 @@ const app = express();
 app.use(cookieParser());
 app.use(helmet())
 app.use(cors({
-    origin: "http://localhost:5174",
+    origin: "http://localhost:5173",
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
 }));
@@ -27,6 +28,7 @@ app.use("/api", userRoutes);
 app.use("/api", productRoutes); //test done
 app.use("/api", categoryRouter); //test done
 app.use("/api", authRoutes)
+app.use("/api", messagesRoutes)
 
 //error handlng middleware
 

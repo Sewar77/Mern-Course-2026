@@ -34,6 +34,12 @@ function Header() {
         </div>
         <div>
           {" "}
+          <button onClick={() => navigate("/admin/dashboard/messages")}>
+            Messages
+          </button>
+        </div>
+        <div>
+          {" "}
           <button onClick={() => navigate("/admin/dashboard/categories")}>
             Categories
           </button>

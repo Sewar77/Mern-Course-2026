@@ -34,7 +34,7 @@ function SideBar({ isOpen }) {
               <button onClick={() => navigate("/user/profile")}>Profile</button>
             </li>
             <li>
-              <a onClick={() => navigate()}>Users</a>
+              <a onClick={() => navigate("/contactus")}>Contact Us</a>
             </li>
             <li>
               <a onClick={() => navigate()}>Products</a>
