@@ -4,9 +4,7 @@ import toast from "react-hot-toast";
 
 function Messages() {
   const [messages, setMessages] = useState([]);
-  const [newStatus, setNewStatus] = useState({
-    ...Messages,
-  });
+
   const fetchMessages = async () => {
     try {
       const res = await api.get("/admin/messages");
@@ -22,12 +20,13 @@ function Messages() {
       console.log(err);
     }
   };
-  const handleUpdateStatus = async (messageId) => {
+  const handleUpdateStatus = async (messageId, status) => {
     //if the value selected = rejected => fasle
     //if approve = true
     try {
-      const res = await api.put(`/message/${messageId}`, { newStatus });
+      const res = await api.put(`/message/${messageId}`, { status });
       toast.success("Status updated successfully");
+      fetchMessages();
     } catch (err) {
       console.log(err);
     }
@@ -55,13 +54,14 @@ function Messages() {
               <strong>Message {idx + 1}:</strong> {msg.message}
             </p>
             <p>
-              <strong>User ID:</strong> {msg.userId}
+              <strong>User Name:</strong> {msg.userId?.name} <br />
+              <strong>User Email:</strong> {msg.userId?.email}
             </p>
             <select
-              defaultValue={"rejected"}
-              onChange={() => handleUpdateStatus(msg._id)}
+              value={msg.status ? "approve" : "rejected"}
+              onChange={(e) => handleUpdateStatus(msg._id, e.target.value)}
             >
-              <option value="reject">Rejected</option>
+              <option value="rejected">Rejected</option>
               <option value="approve">Approved</option>
             </select>
             <p>

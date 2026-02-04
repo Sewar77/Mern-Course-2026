@@ -16,7 +16,7 @@ export const createMessage = async (req, res) => {
 
 export const getAllMessages = async (req, res) => {
     try {
-        const messages = await Message.find().sort({ createdAt: -1 })
+        const messages = await Message.find().sort({ createdAt: -1 }).populate("userId", "name email")
         return res.status(200).json({ messages })
     } catch (err) {
         res.status(500).json({ message: "Server Error", error: err.message })
@@ -25,20 +25,23 @@ export const getAllMessages = async (req, res) => {
 
 export const updateMessageStatus = async (req, res) => {
     const { id } = req.params
-    const { newStatus } = req.body
+    const { status } = req.body
     try {
+        const updatedStatus = await Message.findByIdAndUpdate(
+            id,
+            { status: status === "approve" },
+            { new: true }
+        )
 
-        if (newStatus === "approve") {
-            const updated = await Message.findByIdAndUpdate(id,
-                {
-                    status: newStatus
-                }, { new: true })
-            return res.status(200).json({ updated, message: "approve!" })
+        return res.status(200).json({ message: "Status updated", updatedStatus })
 
-        }
-        await Message.findByIdAndDelete(id)
-        return res.status(200).json({ message: "deleted successfullt" })
     } catch (err) {
         res.status(500).json({ message: "Server Error", error: err.message })
     }
 }
+
+
+
+
+
+

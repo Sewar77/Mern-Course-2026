@@ -42,30 +42,40 @@ function DisplayProducts() {
           </tr>
         </thead>
         <tbody>
-          {products.map((product, index) => {
-            return (
-              <tr key={product._id}>
-                <td>{index + 1}</td>
-                <td>{product.name}</td>
-                <td>{product.price}</td>
-                <td>{product.stock}</td>
-                <td>{product.description || "product description"}</td>
-                <td>
-                  <img
-                    src={product.thumbnail}
-                    alt={product.name}
-                    width="50"
-                    height="50"
-                  />
-                </td>
-                <td>{product.category}</td>
-                <td>
-                  <button>Edit</button>
-                  <button>Delete</button>
+          {Object.keys(products).map((categoryName) => (
+            <React.Fragment key={categoryName}>
+              <tr>
+                <td
+                  colSpan="8"
+                  style={{ fontWeight: "bold", background: "#f2f2f2" }}
+                >
+                  {categoryName}
                 </td>
               </tr>
-            );
-          })}
+              {products[categoryName].map((product, index) => (
+                <tr key={product._id}>
+                  <td>{index + 1}</td>
+                  <td>{product.name}</td>
+                  <td>{product.price}</td>
+                  <td>{product.stock}</td>
+                  <td>{product.description || "product description"}</td>
+                  <td>
+                    <img
+                      src={product.thumbnail}
+                      alt={product.name}
+                      width="50"
+                      height="50"
+                    />
+                  </td>
+                  <td>{product.category?.name || "No Category"}</td>
+                  <td>
+                    <button>Edit</button>
+                    <button>Delete</button>
+                  </td>
+                </tr>
+              ))}
+            </React.Fragment>
+          ))}
         </tbody>
       </table>
     </>

@@ -19,6 +19,7 @@ function ContactUs() {
         toast.error("failed to sewnd message");
       }
       toast.success("message sent successfully");
+      setMessage({ ...message, message: "" });
     } catch (err) {
       console.log(err);
     }

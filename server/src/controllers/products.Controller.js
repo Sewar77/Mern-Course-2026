@@ -29,16 +29,27 @@ export const createProduct = async (req, res) => {
 //get all products
 export const getAllProducts = async (req, res) => {
   try {
-    const products = await Product.find();
+    const products = await Product.find().populate("category", "name")
     //in case there is o products
+    //grouping the products based on categories! using Reduce
     if (products.length === 0) {
       return res
         .status(200)
         .json({ products: [], message: "No products found" });
     }
+    const groupedProducts = products.reduce((acc, product) => {
+      const categoryName = product.category?.name
+
+      if (!acc[categoryName]) {
+        acc[categoryName] = []
+      }
+      acc[categoryName].push(product)
+      return acc
+    }, {})
+
     return res
       .status(200)
-      .json({ products, message: "Products fetched successfully" });
+      .json({ products: groupedProducts, message: "Products fetched successfully" });
   } catch (error) {
     res.status(500).json({ message: "Error fetching products", error });
   }
