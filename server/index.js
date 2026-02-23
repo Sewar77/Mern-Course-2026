@@ -17,10 +17,23 @@ const app = express();
 //MIDDLEWARE 
 app.use(cookieParser());
 app.use(helmet())
+const allowedOrigins = [
+    "https://mern-course-2026-1-frontend.onrender.com",
+    "http://localhost:5173" // for local testing
+];
+
 app.use(cors({
-    origin: "https://mern-course-2026-1-frontend.onrender.com",
+    origin: function (origin, callback) {
+        // allow requests with no origin like mobile apps or curl
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.indexOf(origin) === -1) {
+            var msg = "The CORS policy for this site does not allow access from the specified Origin.";
+            return callback(new Error(msg), false);
+        }
+        return callback(null, true);
+    },
     methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
+    credentials: true
 }));
 app.use(express.json());
 // API routes
