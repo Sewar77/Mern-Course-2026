@@ -30,7 +30,7 @@ app.use(express.json());
 app.use("/api", userRoutes);
 app.use("/api", productRoutes); //test done
 app.use("/api", categoryRouter); //test done
-app.use("/api", authRoutes)
+app.use("/", authRoutes)
 app.use("/api", messagesRoutes)
 
 //error handlng middleware
