@@ -21,16 +21,23 @@ const allowedOrigins = [
     "https://mern-course-2026-1-frontend.onrender.com"];
 
 app.use(cors({
-    origin: allowedOrigins,
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true
+    origin: function (origin, callback) {
+        // allow requests like curl or Postman with no origin
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.indexOf(origin) === -1) {
+            return callback(new Error("CORS not allowed"), false);
+        }
+        return callback(null, true);
+    },
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"]
 }));
 app.use(express.json());
 // API routes
 app.use("/api", userRoutes);
 app.use("/api", productRoutes); //test done
 app.use("/api", categoryRouter); //test done
-app.use("/", authRoutes)
+app.use("/api", authRoutes)
 app.use("/api", messagesRoutes)
 
 //error handlng middleware
