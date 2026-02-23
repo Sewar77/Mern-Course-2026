@@ -1,10 +1,8 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "https://mern-course-2026.onrender.com/api",
+    baseURL: "https://mern-course-2026.onrender.com/api", // /api added
     withCredentials: true,
-    headers: {
-        "Content-Type": "application/json",
-    },
-})
+    headers: { "Content-Type": "application/json" },
+});
 export default api;

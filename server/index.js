@@ -18,9 +18,7 @@ const app = express();
 app.use(cookieParser());
 app.use(helmet())
 const allowedOrigins = [
-    "https://mern-course-2026-1-frontend.onrender.com",
-    "http://localhost:5173"
-];
+    "https://mern-course-2026-1-frontend.onrender.com"];
 
 app.use(cors({
     origin: function (origin, callback) {
